@@ -1,0 +1,4 @@
+cmd/example/Input/
+cmd/example/Output/
+.commandcode/taste/
+.idea/
