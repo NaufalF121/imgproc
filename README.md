@@ -5,7 +5,7 @@ A Go library providing basic image processing operations. All functions accept `
 ## Installation
 
 ```bash
-go get github.com/naufal/imgproc/imgproc
+go get github.com/NaufalF121/imgproc
 ```
 
 ## Usage
