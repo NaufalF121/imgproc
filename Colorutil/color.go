@@ -137,6 +137,9 @@ func nhsia64Model(c color.Color) color.Color {
 	}
 	var h360 int
 	ri, gi, bi, di := int(r), int(g), int(b), int(delta)
+	if di == 0 {
+		return NHSIA64{0, uint16(s), uint16(i), uint16(a)}
+	}
 	switch cMax {
 	case r:
 		h360 = (60*(gi-bi))/di + 0
