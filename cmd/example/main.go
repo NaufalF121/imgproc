@@ -7,7 +7,7 @@ import (
 	"image/png"
 	"os"
 
-	"github.com/NaufalF121/imgproc/imgproc"
+	"github.com/NaufalF121/imgproc"
 )
 
 func loadImage(path string) image.Image {
