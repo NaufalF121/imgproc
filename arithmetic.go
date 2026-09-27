@@ -5,7 +5,7 @@ import (
 	"image/color"
 	"image/draw"
 
-	colorutil "github.com/NaufalF121/imgproc/colorutil"
+	"github.com/NaufalF121/imgproc/colorutil"
 )
 
 // Add adds two images pixel-by-pixel.
