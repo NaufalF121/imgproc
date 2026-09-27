@@ -74,7 +74,7 @@ func nhsiaModel(c color.Color) color.Color {
 	if _, ok := c.(NHSIA); ok {
 		return c
 	}
-	nhsva64 := nhsva64Model(c).(NHSVA64)
+	nhsva64 := nhsia64Model(c).(NHSIA64)
 	scale := func(n16 uint16) uint8 {
 		return uint8((uint32(n16)*255 + 32768) / 65535)
 	}
@@ -105,17 +105,17 @@ func (c NHSIA) RGBA() (r, g, b, a uint32) {
 	return nhsvaFloat64ToRGBA(hf, sf, vf, af)
 }
 
-type NHSVA64 struct {
+type NHSIA64 struct {
 	H, S, I, A uint16
 }
 
-func nhsva64Model(c color.Color) color.Color {
-	if _, ok := c.(NHSVA64); ok {
+func nhsia64Model(c color.Color) color.Color {
+	if _, ok := c.(NHSIA64); ok {
 		return c
 	}
 	r, g, b, a := c.RGBA()
 	if a == 0 {
-		return NHSVA64{0, 0, 0, 0}
+		return NHSIA64{0, 0, 0, 0}
 	}
 
 	r = (r * 65535) / a
@@ -133,7 +133,7 @@ func nhsva64Model(c color.Color) color.Color {
 	}
 
 	if i == 0 {
-		return NHSVA64{0, 0, uint16(i), uint16(a)}
+		return NHSIA64{0, 0, uint16(i), uint16(a)}
 	}
 	var h360 int
 	ri, gi, bi, di := int(r), int(g), int(b), int(delta)
@@ -148,12 +148,12 @@ func nhsva64Model(c color.Color) color.Color {
 	h360 = (h360 + 360) % 360
 	h := uint32((h360*65535 + 180) / 360)
 
-	return NHSVA64{uint16(h), uint16(s), uint16(i), uint16(a)}
+	return NHSIA64{uint16(h), uint16(s), uint16(i), uint16(a)}
 }
 
-var NHSVA64Model color.Model = color.ModelFunc(nhsva64Model)
+var NHSIA64Model color.Model = color.ModelFunc(nhsia64Model)
 
-func (c NHSVA64) RGBA() (r, g, b, a uint32) {
+func (c NHSIA64) RGBA() (r, g, b, a uint32) {
 	a16 := uint32(c.A)
 	if c.S == 0 {
 		v16pm := (uint32(c.I)*a16 + 32768) / 65535
@@ -167,17 +167,17 @@ func (c NHSVA64) RGBA() (r, g, b, a uint32) {
 	return nhsvaFloat64ToRGBA(hf, sf, vf, af)
 }
 
-type NHSVAF64 struct {
+type NHSIAF64 struct {
 	H, S, I, A float64
 }
 
-func nhsvaF64Model(c color.Color) color.Color {
-	if _, ok := c.(NHSVAF64); ok {
+func nhsiaF64Model(c color.Color) color.Color {
+	if _, ok := c.(NHSIAF64); ok {
 		return c
 	}
 	r, g, b, a := c.RGBA()
 	if a == 0 {
-		return NHSVAF64{0.0, 0.0, 0.0, 0.0}
+		return NHSIAF64{0.0, 0.0, 0.0, 0.0}
 	}
 
 	rf := float64(r) / 65535.0
@@ -200,7 +200,7 @@ func nhsvaF64Model(c color.Color) color.Color {
 	}
 
 	if If == 0.0 {
-		return NHSVAF64{0.0, 0.0, If, af}
+		return NHSIAF64{0.0, 0.0, If, af}
 	}
 	var hf float64
 	switch cMax {
@@ -213,12 +213,12 @@ func nhsvaF64Model(c color.Color) color.Color {
 	}
 	hf = math.Mod(hf*60.0+360.0, 360.0)
 
-	return NHSVAF64{hf, sf, If, af}
+	return NHSIAF64{hf, sf, If, af}
 }
 
-var NHSVAF64Model color.Model = color.ModelFunc(nhsvaF64Model)
+var NHSIAF64Model color.Model = color.ModelFunc(nhsiaF64Model)
 
-func (c NHSVAF64) RGBA() (r, g, b, a uint32) {
+func (c NHSIAF64) RGBA() (r, g, b, a uint32) {
 	clamp01 := func(x float64) float64 { return math.Max(0.0, math.Min(1.0, x)) }
 	wrap360 := func(x float64) float64 { return math.Mod(math.Mod(x, 360.0)+360.0, 360.0) }
 	hf := wrap360(c.H)

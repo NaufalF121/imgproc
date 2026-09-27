@@ -5,13 +5,13 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/naufal/imgproc/colorutil"
+	"github.com/NaufalF121/imgproc/colorutil"
 )
 
 // ToHSI converts an RGB image to the HSI color space.
 func ToHSI(img image.Image) (image.Image, error) {
 	bounds := img.Bounds()
-	hsiImg := colorutil.NewNHSVA(bounds)
+	hsiImg := colorutil.NewNHSIA(bounds)
 
 	for x := bounds.Min.X; x < bounds.Max.X; x++ {
 		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
@@ -41,7 +41,7 @@ func ToHSI(img image.Image) (image.Image, error) {
 				}
 			}
 
-			hsiImg.SetNHSVA(x, y, colorutil.NHSIA{
+			hsiImg.SetNHSIA(x, y, colorutil.NHSIA{
 				H: uint8(h * 255.0 / (2 * math.Pi)),
 				S: uint8(s * 255.0),
 				I: uint8(i * 255.0),

@@ -1,11 +1,11 @@
 package imgproc
 
 import (
-	"github.com/spakin/hsvimage"
-	"github.com/spakin/hsvimage/hsvcolor"
 	"image"
 	"image/color"
 	"image/draw"
+
+	colorutil "github.com/NaufalF121/imgproc/colorutil"
 )
 
 // Add adds two images pixel-by-pixel.
@@ -56,13 +56,13 @@ func Subtract(img1, img2 image.Image) (image.Image, error) {
 func Multiply(img image.Image, scalar float64) (image.Image, error) {
 	bounds := img.Bounds()
 	w, h := bounds.Dx(), bounds.Dy()
-	out := hsvimage.NewNHSVAF64(image.Rect(0, 0, w, h))
+	out := colorutil.NewNHSIA(image.Rect(0, 0, w, h))
 	draw.Draw(out, out.Bounds(), img, bounds.Min, draw.Src)
 
 	for x := bounds.Min.X; x < bounds.Max.X; x++ {
 		for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-			c := out.NHSVAF64At(x, y)
-			out.SetNHSVAF64(x, y, hsvcolor.NHSVAF64{H: c.H, S: c.S, V: c.V * scalar, A: c.A})
+			c := out.NHSIAAt(x, y)
+			out.SetNHSIA(x, y, colorutil.NHSIA{H: c.H, S: c.S, I: c.I, A: c.A})
 		}
 	}
 

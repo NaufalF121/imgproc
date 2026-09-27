@@ -45,7 +45,7 @@ func (p *NHSIAImage) Set(x, y int, c color.Color) {
 	s[3] = c1.A
 }
 
-func (p *NHSIAImage) SetNHSVA(x, y int, c NHSIA) {
+func (p *NHSIAImage) SetNHSIA(x, y int, c NHSIA) {
 	if !(image.Point{x, y}.In(p.Rect)) {
 		return
 	}
@@ -70,7 +70,7 @@ func (p *NHSIAImage) SubImage(r image.Rectangle) image.Image {
 	}
 }
 
-func NewNHSVA(r image.Rectangle) *NHSIAImage {
+func NewNHSIA(r image.Rectangle) *NHSIAImage {
 	w, h := r.Dx(), r.Dy()
 	pix := make([]uint8, 4*w*h)
 	return &NHSIAImage{pix, 4 * w, r}
