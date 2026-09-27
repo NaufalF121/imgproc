@@ -185,11 +185,12 @@ func main() {
 
 	fmt.Println("\n=== Boolean Operations ===")
 
-	binA := loadImage("./Input/binerA.png")
-	binB := loadImage("./Input/binerB.png")
+	binA := loadImage("./Output/Threshold.png")
 
 	inverted, _ := imgproc.Invert(binA)
 	saveImage(output+"invert.png", inverted)
+
+	binB := loadImage("./Output/invert.png")
 
 	andImg, _ := imgproc.AND(binA, binB)
 	saveImage(output+"AND.png", andImg)
