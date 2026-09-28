@@ -121,7 +121,7 @@ func main() {
 	translated, _ := imgproc.Translate(img, 100, 0)
 	saveImage(output+"translated.png", translated)
 
-	rotated, _ := imgproc.Rotate180(img)
+	rotated, _ := imgproc.Rotate(img, 120)
 	saveImage(output+"rotated180.png", rotated)
 
 	zoomed, _ := imgproc.ZoomOut(img)
