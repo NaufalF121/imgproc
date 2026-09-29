@@ -53,8 +53,8 @@ func Rotate(img image.Image, degree float64) (image.Image, error) {
 	return out, nil
 }
 
-// ZoomOut scales an image down by half.
-func ZoomOut(img image.Image, scale float64) (image.Image, error) {
+// Scales an image down.
+func Scale(img image.Image, scale float64) (image.Image, error) {
 	bounds := img.Bounds()
 	w, h := bounds.Dx(), bounds.Dy()
 	out := image.NewRGBA(image.Rect(0, 0, int(math.Round(float64(w)*scale)), int(math.Round(float64(h)*scale))))

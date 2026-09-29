@@ -124,7 +124,7 @@ func main() {
 	rotated, _ := imgproc.Rotate(img, 120)
 	saveImage(output+"rotated180.png", rotated)
 
-	zoomed, _ := imgproc.ZoomOut(img, 0.9)
+	zoomed, _ := imgproc.Scale(img, 0.9)
 	saveImage(output+"zoomed_out.png", zoomed)
 
 	flipped, _ := imgproc.FlipVertical(img)
