@@ -6,29 +6,28 @@ import (
 )
 
 // Dilate performs morphological dilation on a grayscale image.
-func Dilate(img image.Image) (image.Image, error) {
-	return morphologicalOp(img, true), nil
+func Dilate(img image.Image, radius int) (image.Image, error) {
+	return morphologicalOp(img, true, radius), nil
 }
 
 // Erode performs morphological erosion on a grayscale image.
-func Erode(img image.Image) (image.Image, error) {
-	return morphologicalOp(img, false), nil
+func Erode(img image.Image, radius int) (image.Image, error) {
+	return morphologicalOp(img, false, radius), nil
 }
 
 // Opening performs morphological opening (erosion then dilation).
-func Opening(img image.Image) (image.Image, error) {
-	eroded := morphologicalOp(img, false)
-	return morphologicalOp(eroded, true), nil
+func Opening(img image.Image, radius int) (image.Image, error) {
+	eroded := morphologicalOp(img, false, radius)
+	return morphologicalOp(eroded, true, radius), nil
 }
 
 // Closing performs morphological closing (dilation then erosion).
-func Closing(img image.Image) (image.Image, error) {
-	dilated := morphologicalOp(img, true)
-	return morphologicalOp(dilated, false), nil
+func Closing(img image.Image, radius int) (image.Image, error) {
+	dilated := morphologicalOp(img, true, radius)
+	return morphologicalOp(dilated, false, radius), nil
 }
 
-func morphologicalOp(img image.Image, dilate bool) image.Image {
-	radius := 1
+func morphologicalOp(img image.Image, dilate bool, radius int) image.Image {
 	bounds := img.Bounds()
 	out := image.NewGray(bounds)
 

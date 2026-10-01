@@ -132,7 +132,7 @@ func main() {
 
 	fmt.Println("\n=== Bit Plane Slicing ===")
 
-	bitplane, _ := imgproc.BitPlaneSlice(img, 5)
+	bitplane, _ := imgproc.BitPlaneSlice(avg, 5)
 	saveImage(output+"bitplane_5.png", bitplane)
 
 	fmt.Println("\n=== Thresholding ===")
@@ -154,17 +154,17 @@ func main() {
 	fmt.Println("\n=== Morphological Operations ===")
 
 	morph := testImg()
-
-	dilated, _ := imgproc.Dilate(morph)
+	radius := 1
+	dilated, _ := imgproc.Dilate(morph, radius)
 	saveImage(output+"dilated.png", dilated)
 
-	eroded, _ := imgproc.Erode(morph)
+	eroded, _ := imgproc.Erode(morph, radius)
 	saveImage(output+"eroded.png", eroded)
 
-	opened, _ := imgproc.Opening(morph)
+	opened, _ := imgproc.Opening(morph, radius)
 	saveImage(output+"opened.png", opened)
 
-	closed, _ := imgproc.Closing(morph)
+	closed, _ := imgproc.Closing(morph, radius)
 	saveImage(output+"closed.png", closed)
 
 	fmt.Println("\n=== Histogram ===")
