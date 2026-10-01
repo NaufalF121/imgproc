@@ -17,7 +17,7 @@ import (
     "image/png"
     "os"
 
-    "github.com/naufal/imgproc/imgproc"
+    "github.com/NaufalF121/imgproc"
 )
 
 func main() {
@@ -118,7 +118,6 @@ Outputs processed images to `./Output/`.
 ## Project Structure
 
 ```
-├── imgproc/       # Core library package
 ├── colorutil/     # Custom color models (HSI, YUV)
 ├── cmd/example/   # Demo program
 ├── Input/         # Sample input images
